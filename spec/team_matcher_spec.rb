@@ -27,6 +27,11 @@ describe TeamMatcher do
     expect(team_matcher.department_return("Team 5")).to eq({"Team 5"=>["Fake dept 1 of 4", "Fake dept 2 of 4", "Fake dept 3 of 4", "Fake dept 4 of 4"]})
   end
 
+  it "isn't so strict about always having department names in capitals" do
+    team_matcher = TeamMatcher.new
+    expect(team_matcher.team_return("gds")).to eq({"GDS" => ["Team 4"]})
+  end
+
   it "returns an error message if no teams are found" do
     team_matcher = TeamMatcher.new
     expect(team_matcher.department_return("noteam")).to eq({"Error"=>["That team can't be found, try again (or tell Keith)."]})

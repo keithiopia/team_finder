@@ -14,7 +14,7 @@ class TeamMatcher
   def team_return(department)
     teams_list={}
     assignments.each do | key, value |
-      teams_list[key] = [value] if key.split.first == department
+      teams_list[key] = [value] if key.split.first == department.upcase
     end
     return teams_list unless teams_list.empty?
     { "Error" => ["That department can't be found, try again (or tell Keith)."]}
