@@ -1,1 +1,21 @@
-Hello Keith
+<h1>Which team looks after what? (Alpha)</h1>
+<form method="post">
+  By department
+  <input type="text" name="department" placeholder="eg. BIS">
+  By team
+  <input type="text" name="team" placeholder="eg. Team 1">
+  <input type="submit" value="Search">
+</form>
+<% if @result %>
+
+<%@result.each do |key,value|%>
+  <h2><%=key%></h2>
+  <ul>
+    <%value.each do |array_values|%>
+    <li><%=array_values%></li>
+    <%end%>
+  </ul>
+  <%end%>
+
+
+<%end%>

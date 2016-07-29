@@ -1,8 +1,25 @@
-class TeamFinder
+class TeamMatcher
+
+  def department_return(team_name)
+    departments_list={}
+    departments_list[team_name]=[]
+    assignments.each do | department, team |
+      departments_list[team_name] = departments_list[team_name].push(department) if team == team_name
+    end
+    return departments_list unless departments_list[team_name].empty?
+    { "Error" => ["That team can't be found, try again (or tell Keith)."]}
+  end
+
 
   def team_return(department)
-    assignments[department]
+    teams_list={}
+    assignments.each do | key, value |
+      teams_list[key] = [value] if key.split.first == department
+    end
+    return teams_list unless teams_list.empty?
+    { "Error" => ["That department can't be found, try again (or tell Keith)."]}
   end
+#TODO: The department_return and team_return give the same thing. Change department_return so it gives all the departments back but the team once. Suggestions: Adding CSS, pushing it to Heroku
 
   def assignments
     {
@@ -10,7 +27,7 @@ class TeamFinder
       "BIS" => "Team 1",
       "CC" => "Team 1",
       "CH" => "Team 1",
-      "OME" => "Team 1",
+      "OME self employed" => "Team 1",
       "DVSA business" => "Team 1",
       "DFT business" => "Team 1",
       "RPA" => "Team 1",
@@ -24,7 +41,7 @@ class TeamFinder
       "MOD" => "Team 1",
       "SPVA" => "Team 1",
       "HMRC personal" => "Team 2",
-      "Insolvency Service" => "Team 2",
+      "IS" => "Team 2",
       "DWP benefits" => "Team 2",
       "DFE" => "Team 2",
       "Ofsted" => "Team 2",
@@ -56,16 +73,16 @@ class TeamFinder
       "HO crime and security" => "Red Team",
       "Scotland" => "Red Team",
       "Wales" => "Red Team",
-      "Northern Ireland" => "Red Team",
+      "NI" => "Red Team",
       "ONS" => "Red Team",
       "ESIF" => "Red Team",
-      "OME" => "Team 4",
+      "OME work and pensions" => "Team 4",
       "HMRC pensions" => "Team 4",
       "BIS jobs" => "Team 4",
       "DWP pensions" => "Team 4",
       "CO" => "Team 4",
       "HO citizenship" => "Team 4",
-      "G Cloud" => "Team 4",
+      "G-Cloud" => "Team 4",
       "CESG" => "Team 4",
       "GCHQ" => "Team 4",
       "GDS" => "Team 4",
@@ -76,7 +93,11 @@ class TeamFinder
       "HMT" => "Team 4",
       "Number 10" => "Team 4",
       "Deputy PM" => "Team 4",
-      "GEO" => "Team 4"
+      "GEO" => "Team 4",
+      "Fake dept 1 of 4" => "Team 5",
+      "Fake dept 2 of 4" => "Team 5",
+      "Fake dept 3 of 4" => "Team 5",
+      "Fake dept 4 of 4" => "Team 5"
     }
   end
 
