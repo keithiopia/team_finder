@@ -2,9 +2,11 @@ class TeamMatcher
 
   def department_return(team_name)
     departments_list={}
+    assignments.detect {|agency, full_team_name| full_team_name == team_name}
+    #TODO: return full team name in team search results.
     departments_list[team_name]=[]
     assignments.each do | department, team |
-      departments_list[team_name] = departments_list[team_name].push(department) if team == team_name
+      departments_list[team_name] = departments_list[team_name].push(department) if team.split[0..1].join(' ') == team_name.capitalize
     end
     return departments_list unless departments_list[team_name].empty?
     { "Error" => ["That team can't be found, try again (or tell Keith)."]}
@@ -19,12 +21,12 @@ class TeamMatcher
     return teams_list unless teams_list.empty?
     { "Error" => ["That department can't be found, try again (or tell Keith)."]}
   end
-#TODO: The department_return and team_return give the same thing. Change department_return so it gives all the departments back but the team once. Suggestions: Adding CSS, pushing it to Heroku
 
   def assignments
     {
       "HMRC business" => "Team 1 (AK's team)",
-      "BIS" => "Team 1 (AK's team)",
+      "BIS" => "Team 1 (now BEIS)",
+      "BEIS" => "Team 1 (AK's team)",
       "CC" => "Team 1 (AK's team)",
       "CH" => "Team 1 (AK's team)",
       "OME self employed" => "Team 1 (AK's team)",
@@ -32,14 +34,16 @@ class TeamMatcher
       "DFT business" => "Team 1 (AK's team)",
       "RPA" => "Team 1 (AK's team)",
       "DEFRA" => "Team 1 (AK's team)",
-      "DECC" => "Team 1 (AK's team)",
+      "DECC" => "Team 1 (part of BEIS)",
       "EA" => "Team 1 (AK's team)",
-      "UKTI" => "Team 1 (AK's team)",
+      "UKTI" => "Team 1 (now DIT)",
+      "DIT" => "Team 1 (AK's team)",
       "CMA" => "Team 1 (AK's team)",
       "IPO" => "Team 1 (AK's team)",
       "UKEF" => "Team 1 (AK's team)",
       "MOD" => "Team 1 (AK's team)",
       "SPVA" => "Team 1 (AK's team)",
+      "VOA business rates" => "Team 1 (AK's team)",
       "HMRC personal" => "Team 2 (JT's team)",
       "IS" => "Team 2 (JT's team)",
       "DWP benefits" => "Team 2 (JT's team)",
@@ -78,7 +82,7 @@ class TeamMatcher
       "ESIF" => "Red Team (JS's team)",
       "OME work and pensions" => "Team 4 (AW's team)",
       "HMRC pensions" => "Team 4 (AW's team)",
-      "BIS jobs" => "Team 4 (AW's team)",
+      "BEIS jobs" => "Team 4 (AW's team)",
       "DWP pensions" => "Team 4 (AW's team)",
       "CO" => "Team 4 (AW's team)",
       "HO citizenship" => "Team 4 (AW's team)",
