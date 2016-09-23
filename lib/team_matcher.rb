@@ -6,7 +6,9 @@ class TeamMatcher
     #TODO: return full team name in team search results.
     departments_list[team_name]=[]
     assignments.each do | department, team |
-      departments_list[team_name] = departments_list[team_name].push(department) if team.split[0..1].join(' ') == team_name.capitalize
+      if team.split[0..1].join(' ').casecmp(team_name) == 0
+        departments_list[team_name] = departments_list[team_name].push(department)
+      end
     end
     return departments_list unless departments_list[team_name].empty?
     { "Error" => ["That team can't be found, try again (or tell Keith)."]}
@@ -25,7 +27,7 @@ class TeamMatcher
   def assignments
     {
       "HMRC business" => "Team 1 (AK's team)",
-      "BIS" => "Team 1 (now BEIS)",
+      "BIS (now BEIS)" => "Team 1 (AK's team)",
       "BEIS" => "Team 1 (AK's team)",
       "CC" => "Team 1 (AK's team)",
       "CH" => "Team 1 (AK's team)",
